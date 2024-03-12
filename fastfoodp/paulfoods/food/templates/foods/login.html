@@ -223,7 +223,7 @@
           </li>
           {%if user.is_authenticated%}
       <li class="nav-item">
-        <a class="nav-link {% if active_link == 'chicken' %} active{% endif %}" href="{% url 'food:chicken' %}">DEPORTES EXTREMOS</a>
+        <a class="nav-link {% if active_link == 'chicken' %} active{% endif %}" href="{% url 'food:actividad' %}">DEPORTES EXTREMOS</a>
       </li>
       
       {%else%}
@@ -242,7 +242,7 @@
           </li>
     
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'food:pizza' %}">PERFIL</a>
+            <a class="nav-link" href="{% url 'food:perfil' %}">PERFIL</a>
           </li>
            {% if user.is_authenticated %}
             <li class="nav-item">
