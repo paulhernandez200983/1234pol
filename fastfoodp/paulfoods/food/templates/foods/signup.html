@@ -6,6 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}CREAR CUENTA{% endblock %}</title>
+<!-- Cargar jQuery desde el CDN de Google -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
@@ -36,7 +38,7 @@
           background-color: #697276;
         }
       .navbar-light .navbar-nav .nav-link {
-        color: #0e8056;
+        color: black;
       }
         .form-inline .btn-success {
             background-color: #28a745;
@@ -68,12 +70,13 @@
     
         .navbar-nav .nav-link {
             color: white;
-            font-weight: bold;
+        
             
         }
     
         .navbar-nav .nav-link:hover {
-            color: #17a2b8; /* Color de resaltado al pasar el ratón */
+          border: 2px solid #1CB55C4F;
+          font-weight:bold;/* Color de resaltado al pasar el ratón */
         }
     
         .CARRT {
@@ -212,13 +215,58 @@ line-height:32px;
       .info{
         color:white;
       }
+      .button {
+        margin: 0;
+        height: auto;
+        background: transparent;
+        padding: 0;
+        border: none;
+        cursor: pointer;
+      }
+      
+      /* button styling */
+      .button {
+        --border-right: 6px;
+        --text-stroke-color: rgba(255,255,255,0.6);
+        --animation-color: #37FF8B;
+        --fs-size: 2em;
+        letter-spacing: 3px;
+        text-decoration: none;
+        font-size: var(--fs-size);
+        font-family: "Arial";
+        position: relative;
+        text-transform: uppercase;
+        color: transparent;
+        -webkit-text-stroke: 1px var(--text-stroke-color);
+      }
+      /* this is the text, when you hover on button */
+      .hover-text {
+        position: absolute;
+        box-sizing: border-box;
+        content: attr(data-text);
+        color: var(--animation-color);
+        width: 0%;
+        inset: 0;
+        border-right: var(--border-right) solid var(--animation-color);
+        overflow: hidden;
+        transition: 0.5s;
+        -webkit-text-stroke: 1px var(--animation-color);
+      }
+      /* hover */
+      .button:hover .hover-text {
+        width: 100%;
+        filter: drop-shadow(0 0 23px var(--animation-color))
+      }
 </style>
 </head>
 <body>
   <nav class="navbar navbar-expand-sm bg-light navbar-light">
     <!-- Brand/logo -->
     <a class="navbar-brand" href="#">
-      <img class="bg-light rounded-circle" src="https://img.freepik.com/vector-gratis/logotipo-viaje-detallado_23-2148627268.jpg" alt="" style="width:100px;"/>
+      <button class="button" data-text="Awesome">
+        <span style="color:black;" class="actual-text">&nbsp;EXTREMETRAVEL&nbsp;</span>
+        <span aria-hidden="true" class="hover-text">&nbsp;EXTREMETRAVEL&nbsp;</span>
+    </button>
     </a>
     
     <!-- Links -->
@@ -228,7 +276,7 @@ line-height:32px;
       </li>
       {%if user.is_authenticated%}
       <li class="nav-item">
-        <a class="nav-link {% if active_link == 'chicken' %} active{% endif %}" href="{% url 'food:chicken' %}">DEPORTES EXTREMOS</a>
+        <a class="nav-link {% if active_link == 'chicken' %} active{% endif %}" href="{% url 'food:actividad' %}">DEPORTES EXTREMOS</a>
       </li>
       
       {%else%}
@@ -247,11 +295,11 @@ line-height:32px;
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="{% url 'food:pizza' %}">PERFIL</a>
+        <a class="nav-link" href="{% url 'food:perfil' %}">PERFIL</a>
       </li>
        {% if user.is_authenticated %}
         <li class="nav-item">
-            <span class="navbar-text">Bienvenido {{ user.username }}</span>
+            <span class="navbar-link">DE {{ user.username }}</span>
         </li><li class="nav-item">
         <a href="{% url 'food:ver_carrito_y_pagar' %}" class="nav-link {% if active_link == 'index' %}active {% endif %}">
             <img srcset="https://img.icons8.com/small/344/add-shopping-cart.png 2x" alt="icon" loading="lazy" style="width: 30px; height: 30px; filter: invert(0%) sepia(9%) saturate(7465%) hue-rotate(38deg) brightness(112%) contrast(97%);"/>
@@ -287,6 +335,7 @@ line-height:32px;
     
   </nav>
   <br><br><br>
+ 
   <div class="container mt-5">
     <div class="row justify-content-center">
       <div class="col-md-5 rounded">
@@ -300,13 +349,22 @@ line-height:32px;
                 <label>{{ field.label_tag }}</label><br>
                 {{ field }}
                 {% if field.help_text %}
-                  <small class="form-text text-muted inf" style="
-                    color: #f4fffbad;">{{ field.help_text }}</small>
-                {% endif %}
+        <div class="help-icon" data-toggle="tooltip" title="Haz clic para obtener ayuda">
+            <img class="bg-light rounded-circle" src="https://cdn-icons-png.flaticon.com/512/2984/2984971.png" alt="Icono de ayuda" style="width:20px; height:20px;">
+        </div>
+        <div class="help-text" style="display: none;">{{ field.help_text }}</div>
+    {% endif %} <script>
+    // JavaScript para mostrar u ocultar el texto de ayuda al hacer clic en el icono
+    $(document).ready(function(){
+        $('.help-icon').click(function(){
+            $(this).next('.help-text').toggle();
+        });
+    });
+</script>
               </div>
             {% endfor %}
             <br><br>
-            <button type="submit" class="btn btn-info btn-block btn-sm">Registrate</button>
+            <button type="submit" class="btn btn-info btn-block btn-sm"><b>Registrate</b></button>
           </form>
           {% for error in form.non_field_errors %}
             <small class="text-danger">{{ error }}</small>

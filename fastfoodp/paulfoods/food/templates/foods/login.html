@@ -15,6 +15,132 @@
     <link rel="icon" href="https://www.flaticon.es/svg/vstatic/svg/3916/3916657.svg?token=exp=1662854069~hmac=136bd71682904cb823525cd8938961b9">
     {% load static %}
     <style>
+      .form {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        padding-left: 2em;
+        padding-right: 2em;
+        padding-bottom: 0.4em;
+        background-color: #171717;
+        border-radius: 20px;
+      }
+      
+      #heading {
+        text-align: center;
+        margin: 2em;
+        color: rgb(0, 255, 200);
+        font-size: 1.2em;
+      }
+      
+      .field {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5em;
+        border-radius: 25px;
+        padding: 0.6em;
+        border: none;
+        outline: none;
+        color: white;
+        background-color: #171717;
+        box-shadow: inset 2px 5px 10px rgb(5, 5, 5);
+      }
+      
+      .input-icon {
+        height: 1.3em;
+        width: 1.3em;
+        fill: rgb(0, 255, 200);
+      }
+      
+      .input-field {
+        background: none;
+        border: none;
+        outline: none;
+        width: 100%;
+        color: rgb(0, 255, 200);
+      }
+      
+      .form .btn {
+        display: flex;
+        justify-content: center;
+        flex-direction: row;
+        margin-top: 2.5em;
+      }
+      
+      .button1 {
+        padding: 0.5em;
+        padding-left: 1.1em;
+        padding-right: 1.1em;
+        border-radius: 5px;
+        margin-right: 0.5em;
+        border: none;
+        outline: none;
+        transition: .4s ease-in-out;
+        background-image: linear-gradient(163deg, #00ff75 0%, #3700ff 100%);
+        color: rgb(0, 0, 0);
+      }
+      
+      .button1:hover {
+        background-image: linear-gradient(163deg, #00642f 0%, #13034b 100%);
+        color: rgb(0, 255, 200);
+      }
+      
+      .button2 {
+        padding: 0.5em;
+        padding-left: 2.3em;
+        padding-right: 2.3em;
+        border-radius: 5px;
+        border: none;
+        outline: none;
+        transition: .4s ease-in-out;
+        background-image: linear-gradient(163deg, #00ff75 0%, #3700ff 100%);
+        color: rgb(0, 0, 0);
+      }
+      
+      .button2:hover {
+        background-image: linear-gradient(163deg, #00642f 0%, #13034b 100%);
+        color: rgb(0, 255, 200);
+      }
+      
+      .button3 {
+        margin-bottom: 3em;
+        padding: 0.5em;
+        border-radius: 5px;
+        border: none;
+        outline: none;
+        transition: .4s ease-in-out;
+        background-image: linear-gradient(163deg, #00ff75 0%, #3700ff 100%);
+        color: rgb(0, 0, 0);
+      }
+      
+      .button3:hover {
+        background-image: linear-gradient(163deg, #a00000fa 0%, #d10050 100%);
+        color: rgb(255, 255, 255);
+      }
+      
+      .card {
+        background-image: linear-gradient(163deg, #00ff75 0%, #3700ff 100%);
+        border-radius: 22px;
+        transition: all .3s;
+      }
+      
+      .card2 {
+        border-radius: 0;
+        transition: all .2s;
+      }
+      
+      .card2:hover {
+        transform: scale(0.98);
+        border-radius: 20px;
+      }
+      
+      .card:hover {
+        box-shadow: 0px 0px 30px 1px rgba(0, 255, 117, 0.30);
+      }
+
+
+
       body {
         background-image: url('https://img.freepik.com/foto-gratis/concreto-texturado-blanco_125540-1826.jpg?w=996&t=st=1708584169~exp=1708584769~hmac=6802f37a96b71f7b953580787dab6c7cf1f21b681cf0d8a35082798e77006d33');
         background-size: cover;
@@ -42,7 +168,7 @@
         }
       
       .navbar-light .navbar-nav .nav-link {
-        color: #0e8056;
+        color: black;
       }
         .form-inline .btn-success {
             background-color: #28a745;
@@ -83,12 +209,13 @@
     
         .navbar-nav .nav-link {
             color: white;
-            font-weight: bold;
+            
             
         }
     
         .navbar-nav .nav-link:hover {
-            color: #17a2b8; /* Color de resaltado al pasar el ratón */
+          border: 2px solid #1CB55C4F;
+          font-weight:bold; /* Color de resaltado al pasar el ratón */
         }
     
         .CARRT {
@@ -207,13 +334,60 @@
         font-weight: bold;
       }
 
+      .button {
+        margin: 0;
+        height: auto;
+        background: transparent;
+        padding: 0;
+        border: none;
+        cursor: pointer;
+      }
+      
+      /* button styling */
+      .button {
+        --border-right: 6px;
+        --text-stroke-color: rgba(255,255,255,0.6);
+        --animation-color: #37FF8B;
+        --fs-size: 2em;
+        letter-spacing: 3px;
+        text-decoration: none;
+        font-size: var(--fs-size);
+        font-family: "Arial";
+        position: relative;
+        text-transform: uppercase;
+        color: transparent;
+        -webkit-text-stroke: 1px var(--text-stroke-color);
+      }
+      /* this is the text, when you hover on button */
+      .hover-text {
+        position: absolute;
+        box-sizing: border-box;
+        content: attr(data-text);
+        color: var(--animation-color);
+        width: 0%;
+        inset: 0;
+        border-right: var(--border-right) solid var(--animation-color);
+        overflow: hidden;
+        transition: 0.5s;
+        -webkit-text-stroke: 1px var(--animation-color);
+      }
+      /* hover */
+      .button:hover .hover-text {
+        width: 100%;
+        filter: drop-shadow(0 0 23px var(--animation-color))
+      }
+      
+
     </style>
     </head>
     <body>
       <nav class="navbar navbar-expand-sm bg-light navbar-light">
         <!-- Brand/logo -->
         <a class="navbar-brand" href="#">
-          <img class="bg-light rounded-circle" src="https://img.freepik.com/vector-gratis/logotipo-viaje-detallado_23-2148627268.jpg" alt="" style="width:100px;"/>
+          <button class="button" data-text="Awesome">
+            <span style="color:black;" class="actual-text">&nbsp;EXTREMETRAVEL&nbsp;</span>
+            <span aria-hidden="true" class="hover-text">&nbsp;EXTREMETRAVEL&nbsp;</span>
+        </button>
         </a>
         
         <!-- Links -->
@@ -223,7 +397,7 @@
           </li>
           {%if user.is_authenticated%}
       <li class="nav-item">
-        <a class="nav-link {% if active_link == 'chicken' %} active{% endif %}" href="{% url 'food:chicken' %}">DEPORTES EXTREMOS</a>
+        <a class="nav-link {% if active_link == 'chicken' %} active{% endif %}" href="{% url 'food:actividad' %}">DEPORTES EXTREMOS</a>
       </li>
       
       {%else%}
@@ -242,7 +416,7 @@
           </li>
     
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'food:pizza' %}">PERFIL</a>
+            <a class="nav-link" href="{% url 'food:perfil' %}">PERFIL</a>
           </li>
            {% if user.is_authenticated %}
             <li class="nav-item">
@@ -315,43 +489,38 @@
   </div>
   
       <h1></h1>
-         <div class="container-fluid p-5">
-            <div class="row">
-                <div class="col-md-4"></div>
-                <div style="border: 3px solid #0fd28a;" class="col-md-4 rounded p-4 bg-dark text-light text-center">
-                    <h3 style="color: #0fd28a;" >Ingresa a tu cuenta </h3><br>
-                    <form method="POST" >
-                       {% csrf_token %}
-                    
-                       <div class="form-group">
-                       
-                          <input style="border: 3px solid #0fd28a;" type="text" name="username" placeholder="Username">
- <b>
-                   
-                        </b></div>
-                       <div class="form-group">
-                        <input style="border: 3px solid #0fd28a;"type="password" name="password" placeholder="********">
-                        
-                 
-                     </div>
-                       
-                            
-                        
-                        
+      <div class="container-fluid" style="width:57%; background-size: cover;background-image: url('https://cdn.dribbble.com/users/967990/screenshots/2706145/letadlo_dribbble.gif');background-position: right;">
+        <div class="row" style="display: flex;">
+            <div class="col-md-6 " style="border: 5px solid #0fd28a;width: 400px;background-color: #000000b0;">
+                <!-- Columna izquierda: Formulario de inicio de sesión -->
+                <div class="rounded p-4 bg text-light text-center" style="width: min-content;">
+                    <h3 style="color: #0fd28a;"><br><br>Ingresa a tu cuenta</h3><br>
+                    <form style="padding:6 rem;" method="POST">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <input style="border: 3px solid #0fd28a;" type="text" name="username" placeholder="Username">
+                        </div>
+                        <div class="form-group">
+                            <input style="border: 3px solid #0fd28a;" type="password" name="password" placeholder="********"><br>
+                        </div><br>
                         <button style="font-weight: bold;" type="submit" class="btn-info">Acceder</button>
-                        
                         {% if messages %}
                         <ul class="pt-2 text-center">
-                            {% for msg in messages%}
+                            {% for msg in messages %}
                             <li style="color:red">{{msg}}</li>
                             {% endfor %}
                         </ul>
                         {% endif %}
                     </form>
                 </div>
-                <div class="col-md-3"></div>
             </div>
-         </div>
+            <div class="col-md-6" style="border: 5px solid #0fd28a;">
+                <!-- Columna derecha: Imagen -->
+                <img style="padding: 6rem;" src="" alt="" class="img-fluid">
+            </div>
+        </div>
+    </div>
+
         
         
         <h2>{{msg}}</h2></center>

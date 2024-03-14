@@ -26,7 +26,7 @@
       }
         
           .navbar-light .navbar-nav .nav-link {
-            color: #0e8056;
+            color: BLACK;
           }
       body {
         background-image: url('https://img.freepik.com/foto-gratis/concreto-texturado-blanco_125540-1826.jpg?w=996&t=st=1708584169~exp=1708584769~hmac=6802f37a96b71f7b953580787dab6c7cf1f21b681cf0d8a35082798e77006d33');
@@ -58,7 +58,11 @@
   line-height:32px;
   
   
-      }
+      }p{
+        border: 2px solid #a6aaa6;
+        padding:20px;
+        background-color: #776e6e2b;
+  }
       .form-inline .btn-success:hover {
           background-color: #218838; /* Color de resaltado al pasar el ratón */
           border-color: #1e7e34;
@@ -88,11 +92,12 @@
    
       .navbar-nav .nav-link {
           color: white;
-          font-weight: bold;
+     
       }
   
       .navbar-nav .nav-link:hover {
-          color: #17a2b8; /* Color de resaltado al pasar el ratón */
+        text-decoration: underline;
+        font-weight:bold;
       }
   
       .CARRT {
@@ -102,7 +107,7 @@
   
       .navbar-text {
           color: black;
-          font-weight: bold;
+        
       }
   
       .navbar-nav {
@@ -170,6 +175,50 @@
         a{
           color: #0e8056;
         }
+
+        /* === removing default button style ===*/
+.button {
+  margin: 0;
+  height: auto;
+  background: transparent;
+  padding: 0;
+  border: none;
+  cursor: pointer;
+}
+
+/* button styling */
+.button {
+  --border-right: 6px;
+  --text-stroke-color: rgba(255,255,255,0.6);
+  --animation-color: #37FF8B;
+  --fs-size: 2em;
+  letter-spacing: 3px;
+  text-decoration: none;
+  font-size: var(--fs-size);
+  font-family: "Arial";
+  position: relative;
+  text-transform: uppercase;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--text-stroke-color);
+}
+/* this is the text, when you hover on button */
+.hover-text {
+  position: absolute;
+  box-sizing: border-box;
+  content: attr(data-text);
+  color: var(--animation-color);
+  width: 0%;
+  inset: 0;
+  border-right: var(--border-right) solid var(--animation-color);
+  overflow: hidden;
+  transition: 0.5s;
+  -webkit-text-stroke: 1px var(--animation-color);
+}
+/* hover */
+.button:hover .hover-text {
+  width: 100%;
+  filter: drop-shadow(0 0 23px var(--animation-color))
+}
     
         </style>
         </head>
@@ -177,7 +226,10 @@
           <nav class="navbar navbar-expand-sm bg-light navbar-light">
             <!-- Brand/logo -->
             <a class="navbar-brand" href="#">
-              <img class="bg-light rounded-circle" src="https://img.freepik.com/vector-gratis/logotipo-viaje-detallado_23-2148627268.jpg" alt="" style="width:100px;"/>
+              <button class="button" data-text="Awesome">
+                <span style="color:black;" class="actual-text">&nbsp;EXTREMETRAVEL&nbsp;</span>
+                <span aria-hidden="true" class="hover-text">&nbsp;EXTREMETRAVEL&nbsp;</span>
+            </button>
             </a>
             
             <!-- Links -->
@@ -210,19 +262,19 @@
               </li>
                {% if user.is_authenticated %}
                 <li class="nav-item">
-                    <span class="navbar-text">Bienvenido {{ user.username }}</span>
-                </li>
-                {% endif %}
-              <li class="nav-item">
+                    <span class="navbar-text">DE {{ user.username }}</span>
+                </li><li class="nav-item">
                 <a href="{% url 'food:ver_carrito_y_pagar' %}" class="nav-link {% if active_link == 'index' %}active {% endif %}">
                     <img srcset="https://img.icons8.com/small/344/add-shopping-cart.png 2x" alt="icon" loading="lazy" style="width: 30px; height: 30px; filter: invert(0%) sepia(9%) saturate(7465%) hue-rotate(38deg) brightness(112%) contrast(97%);"/>
                     
                 </a>
               </li>
+                {% endif %}
+              
               {% if user.is_authenticated %}
               <li class="nav-item">
                 <a href="{% url 'food:logout' %}" class="nav-link">
-                    <img class="bg-light rounded-circle" srcset="https://img.icons8.com/external-bearicons-glyph-bearicons/344/external-log-in-call-to-action-bearicons-glyph-bearicons-1.png 2x" alt="icon" loading="lazy" style="width: 30px; height: 30px; filter: invert(0%) sepia(0%) saturate(0%) hue-rotate(102deg) brightness(99%) contrast(104%);"/>
+                  <img class="bg-light rounded-circle" srcset="{{user.profile_image_url}}"  style="width: 40px; height: 40px;"/>
                     LogOut
                 </a>
               </li>
@@ -257,21 +309,23 @@
       <!-- Imagen de usuario -->
       <div style="flex: 2;">
           <img class="profile-image" src="{{ user.profile_image_url }}" alt="SIN IMAGEN DE PERFIL"><br>
+          <p>{{puntos}}</p>
       </div>
       <!-- Datos del usuario -->
-      <div style="flex: 2; padding-left: 20px; text-align: right;">
-          <p><strong>Bienvenido {{ user.username }}</strong></p><br>
-          <p><strong>Nombre:</strong> {{ user.first_name }} {{ user.last_name }}</p><br>
-          <p><strong>Email:</strong> {{ user.email }}</p><br>
-          <p><strong>Teléfono:</strong> {{ user.phone_number }}</p><br>
-          <p><strong>Dirección:</strong> {{ user.direccion }}</p><br>
-          <p><img class="bg-light rounded" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Flag_of_Mexico.svg/2560px-Flag_of_Mexico.svg.png" alt="" style="width:60px;"><strong> Estado:</strong> {{ user.estado }}</p><br>
-          <p><strong>Cuenta creada el:</strong> {{ user.date_joined }}</p>
+      <div style="flex: 2; padding-left: 20px; text-align: center;">
+          <p class="rounded"><strong>Bienvenido {{ user.username }}</strong></p>
+          <p class="rounded"><strong>Nombre:</strong> {{ user.first_name }} {{ user.last_name }}</p>
+          <p class="rounded"><strong>Email:</strong> {{ user.email }}</p>
+          <p class="rounded"><strong>Teléfono:</strong> {{ user.phone_number }}</p>
+          <p class="rounded"><strong>Dirección:</strong> {{ user.direccion }}</p>
+          <p class="rounded"><img class="bg-light rounded" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Flag_of_Mexico.svg/2560px-Flag_of_Mexico.svg.png" alt="" style="width:60px;"><strong> Estado:</strong> {{ user.estado }}</p><br>
+          <p class="rounded"><strong>Cuenta creada el:</strong> {{ user.date_joined }}</p>
       </div>
       
       
         
   </div>
+  <br><br>
   <button id="editProfileBtn" class="btn btn-info"><b>Editar Perfil</b></button>
       <div id="editFormContainer"></div>
       <script>
@@ -340,15 +394,31 @@
   {% endif %}
   <br><br><br><br>
   <h2><b>User Orders</b></h2>
-  <ul>
-      {% for order in user_orders %}
-          Order ID: {{ order.id }}, Total Amount: {{ order.total_amount }}
-          <!-- Aquí puedes agregar más detalles de la orden si lo deseas -->
-      {% empty %}
-          No orders found.
-      {% endfor %}
-  </ul>
+  {% if user.is_authenticated %}
+  <table class="table table-bordered"> 
+    <thead>
+        <tr>
+            <th>Producto</th>
+            <th>Precio</th>
+            <th>Cantidad</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in items_carrito %}
+        <tr>
+            <td>- {{ item.pollo.name }}</td>
+            <td>${{ item.pollo.priceM }}</td>
+            <td>{{ item.cantidad }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="3">No hay productos en el carrito</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>{%endif%}
 </div>
+
 {% endblock %}
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     

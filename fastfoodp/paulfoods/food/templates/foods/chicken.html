@@ -113,8 +113,8 @@
           color: #0e8056;
         }
       
-      .navbar-light .navbar-nav .nav-link {
-        color: #0e8056;
+      .navbar-light .navbar-nav .nav-link{
+        color: black;
       }
         .form-inline .btn-success {
             background-color: #28a745;
@@ -123,6 +123,7 @@
         }
         .btn-info {
           color: #fff;
+          border: 2px solid #00aa6c;
            background-color: #0fd28a;
           border-color: #80ae90;
           margin: 5px;
@@ -132,8 +133,31 @@
   border-radius: 50px;
   font-size:18px;
   line-height:32px;
+  padding: 1.3em 3em;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-weight: 500;
+  color: #000;
+  background-color: #fff;
+  
+  border-radius: 45px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
   
   
+        }
+        .btn-info:hover {
+          background-color: #23c483;
+          box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+          color: #fff;
+          transform: translateY(-7px);
+        }
+
+        .btn-info:active {
+          transform: translateY(-1px);
         }
         .form-inline .btn-success:hover {
             background-color: #218838; /* Color de resaltado al pasar el ratón */
@@ -155,12 +179,13 @@
     
         .navbar-nav .nav-link {
             color: white;
-            font-weight: bold;
+          
             
         }
     
         .navbar-nav .nav-link:hover {
-            color: #17a2b8; /* Color de resaltado al pasar el ratón */
+          text-decoration: underline;
+          font-weight:bold; /* Color de resaltado al pasar el ratón */
         }
     
         .CARRT {
@@ -308,7 +333,48 @@
         justify-content: center;
         background-color:#f8f9fa;
     }
+    .button {
+      margin: 0;
+      height: auto;
+      background: transparent;
+      padding: 0;
+      border: none;
+      cursor: pointer;
+    }
     
+    /* button styling */
+    .button {
+      --border-right: 6px;
+      --text-stroke-color: rgba(255,255,255,0.6);
+      --animation-color: #37FF8B;
+      --fs-size: 2em;
+      letter-spacing: 3px;
+      text-decoration: none;
+      font-size: var(--fs-size);
+      font-family: "Arial";
+      position: relative;
+      text-transform: uppercase;
+      color: transparent;
+      -webkit-text-stroke: 1px var(--text-stroke-color);
+    }
+    /* this is the text, when you hover on button */
+    .hover-text {
+      position: absolute;
+      box-sizing: border-box;
+      content: attr(data-text);
+      color: var(--animation-color);
+      width: 0%;
+      inset: 0;
+      border-right: var(--border-right) solid var(--animation-color);
+      overflow: hidden;
+      transition: 0.5s;
+      -webkit-text-stroke: 1px var(--animation-color);
+    }
+    /* hover */
+    .button:hover .hover-text {
+      width: 100%;
+      filter: drop-shadow(0 0 23px var(--animation-color))
+    }
 
     </style>
 </head>
@@ -318,9 +384,11 @@
       <nav class="navbar navbar-expand-sm bg-light navbar-light">
         <!-- Brand/logo -->
         <a class="navbar-brand" href="#">
-          <img class="bg-light rounded-circle" src="https://img.freepik.com/vector-gratis/logotipo-viaje-detallado_23-2148627268.jpg" alt="" style="width:100px;"/>
+          <button class="button" data-text="Awesome">
+            <span style="color:black;" class="actual-text">&nbsp;EXTREMETRAVEL&nbsp;</span>
+            <span aria-hidden="true" class="hover-text">&nbsp;EXTREMETRAVEL&nbsp;</span>
+        </button>
         </a>
-  
         <!-- Navbar toggle button -->
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -349,7 +417,7 @@
             </li>
             {% if user.is_authenticated %}
             <li class="nav-item">
-              <span class="navbar-text">Bienvenido {{ user.username }}</span>
+              <span class="navbar-text">DE {{ user.username }}</span>
             </li><li class="nav-item">
               <a href="{% url 'food:ver_carrito_y_pagar' %}" class="nav-link {% if active_link == 'index' %}active {% endif %}">
                   <img srcset="https://img.icons8.com/small/344/add-shopping-cart.png 2x" alt="icon" loading="lazy" style="width: 30px; height: 30px; filter: invert(0%) sepia(9%) saturate(7465%) hue-rotate(38deg) brightness(112%) contrast(97%);"/>
@@ -358,7 +426,7 @@
             </li>
             <li class="nav-item">
               <a href="{% url 'food:logout' %}" class="nav-link">
-                <img class="bg-light rounded-circle" srcset="https://img.icons8.com/external-bearicons-glyph-bearicons/344/external-log-in-call-to-action-bearicons-glyph-bearicons-1.png 2x" alt="icon" loading="lazy" style="width: 30px; height: 30px; filter: invert(0%) sepia(0%) saturate(0%) hue-rotate(102deg) brightness(99%) contrast(104%);"/>
+                <img class="bg-light rounded-circle" srcset="{{user.profile_image_url}}"  style="width: 40px; height: 40px;"/>
                 LogOut
               </a>
             </li>
@@ -378,8 +446,9 @@
             {% endif %}
           </ul>
         </div>
-      </nav>
+      </nav>  <br><br>
     </div>
+  
   {% block content %} {% endblock %}
   <center>
     <div class="banner">
@@ -422,7 +491,7 @@
     <div class="container">
      
           <div class="container mt-2">
-            <button type="button" class=" BET btn btn-info" onclick="filterByTerrestrial('{{chicken.catg}}')"><img srcset="https://media.istockphoto.com/id/1314393435/es/vector/piloto-de-atv-icono-glifo-vectorial-plano-quad.jpg?s=612x612&w=0&k=20&c=mJaTmPLmUUCnG9LvHSbp7mnz8U9kMMPcvlJ_EaAfnLs= 2x" alt="icon" loading="lazy" style="width: 30px; height: 30px;"/><b> Mostrar Terrestres</b></button>
+            <button type="button" class=" BET btn-info" onclick="filterByTerrestrial('{{chicken.catg}}')"><img srcset="https://media.istockphoto.com/id/1314393435/es/vector/piloto-de-atv-icono-glifo-vectorial-plano-quad.jpg?s=612x612&w=0&k=20&c=mJaTmPLmUUCnG9LvHSbp7mnz8U9kMMPcvlJ_EaAfnLs= 2x" alt="icon" loading="lazy" style="width: 30px; height: 30px;"/><b> Mostrar Terrestres</b></button>
             <button type="button" class="BET btn btn-info" onclick="filterByAerial('{{chicken.catg}}')"><img srcset="https://media.istockphoto.com/id/1357597454/es/vector/parapente-dos-personas-con-paraca%C3%ADdas-silueta-eps.jpg?s=612x612&w=0&k=20&c=Ks-eLVr0ykfkLe1DgM1yBjwOoPriq2RjPPg9fbvHFuY= 2x" alt="icon" loading="lazy" style="width: 30px; height: 30px;"/><b> Mostrar Aereos</b></button>
             <button type="button" class="BET btn btn-info" onclick="filterByAqua('{{chicken.catg}}')"><img srcset="https://st4.depositphotos.com/2517275/29911/v/450/depositphotos_299115886-stock-illustration-front-view-of-a-boat.jpg 2x" alt="icon" loading="lazy" style="width: 30px; height: 30px;"/><b> Mostrar Acuaticos</b></button>
         </div>
@@ -820,7 +889,7 @@ function filterByAqua() {
           <div class="carousel-caption d-none d-md-block" >
         
         
-           <button style="background-color: #00000063;" class="btn-info mt-4" onclick="redirectToDetails('{{ chicken.id }}')">Ver Detalles</button>
+           <button style="background-color: #00000063; color:white;" class="btn-info mt-4" onclick="redirectToDetails('{{ chicken.id }}')">Ver Detalles</button>
           </div>
           <script>
             function redirectToDetails(chickenId) {

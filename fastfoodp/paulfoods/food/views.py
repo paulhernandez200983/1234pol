@@ -146,23 +146,7 @@ def logOut(request):
     logout(request)
     return redirect('index')
 from .models import OrderItem
-def profile(request):
-    user_data = None
-    user_orders = Order1.objects.all()
-    orders1 = OrderItem.objects.all()
-    if request.method == 'POST':
-        # Procesar el formulario y obtener los datos del usuario
-        username = request.POST.get('username')
-        email = request.POST.get('email')
-        
-        # Puedes hacer algo con estos datos, como almacenarlos en el modelo del usuario
-
-        # Puedes asignar los datos para mostrarlos en la plantilla
-        user_data = {'username': username, 'email': email}
-
-    return render(request, 'foods/pizza.html', {'user_data': user_data, 'orders': user_orders, 'orders1': orders1})
-
-
+from .models import Carrito, ItemCarrito
 
 from django.shortcuts import render, get_object_or_404
 from .models import Chicken1, ChickenReview
@@ -316,7 +300,7 @@ def ver_chickens(request):
     # Obtener los elementos del carrito
     items_carrito = ItemCarrito.objects.filter(carrito=carrito)
     
-    return render(request, 'foods/sucess.html''foods/chicken.html','foods/steak.html', {'chickens': chickens, 'items_carrito': items_carrito})
+    return render(request,'foods/pizza.html', 'foods/sucess.html','foods/chicken.html','foods/steak.html', {'chickens': chickens, 'items_carrito': items_carrito})
 
 
 def chicken(request):
@@ -614,3 +598,42 @@ def edit_user(request, user_id):
     user = CustomUser.objects.get(id=user_id)
     form = NewUserForm(instance=user)
     return render(request, 'foods/editform.html', {'form': form})
+
+
+def profile(request):
+    user_data = None
+    user_orders = Order1.objects.all()
+    orders1 = OrderItem.objects.all()
+    if request.method == 'POST':
+        # Procesar el formulario y obtener los datos del usuario
+        username = request.POST.get('username')
+        email = request.POST.get('email')
+        
+        # Puedes hacer algo con estos datos, como almacenarlos en el modelo del usuario
+
+        # Puedes asignar los datos para mostrarlos en la plantilla
+        user_data = {'username': username, 'email': email}
+        carrito, _ = Carrito.objects.get_or_create(usuario=request.user)
+    
+    # Obtener los elementos del carrito
+    items_carrito = ItemCarrito.objects.filter(carrito=carrito)
+    
+    # Inicializar la variable para almacenar la cantidad total de puntos por actividad
+    total_puntos = 0
+    # Obtener el carrito del usuario actual
+    for item in items_carrito:
+        total_puntos += item.pollo.puntos
+    
+    # Calcular la cantidad de puntos que se deben deducir del total del carrito
+    puntos_deducidos = total_puntos * 100
+    
+    # Calcular el total del carrito
+    total_carrit = sum(item.pollo.priceM * item.cantidad for item in items_carrito)
+    
+    # Restar los puntos deducidos del total del carrito
+    total_carrito = total_carrit- puntos_deducidos
+
+
+    return render(request, 'foods/pizza.html', {'user_data': user_data, 'orders': user_orders, 'orders1': orders1 , 'items_carrito': items_carrito, 'subtotal': total_carrit, 'total':total_carrito, 'puntos':puntos_deducidos})
+
+

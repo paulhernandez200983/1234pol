@@ -23,7 +23,11 @@
     align-items: center;
     gap: 20px;
   }
-  
+  p{
+    border: 2px solid #a6aaa6;
+    padding:20px;
+        background-color: #776e6e2b;
+  }
   .paypal-button, .card-button {
     border: none;
     background: none;
@@ -79,7 +83,7 @@
       background-color: #697276;
     }
   .navbar-light .navbar-nav .nav-link {
-    color:#0e8056;
+    color:black;
   }
   
 
@@ -123,12 +127,13 @@ line-height:32px;
 
     .navbar-nav .nav-link {
         color: white;
-        font-weight: bold;
+      
         
     }
 
     .navbar-nav .nav-link:hover {
-        color: #17a2b8; /* Color de resaltado al pasar el ratón */
+      text-decoration: underline;
+      font-weight:bold;
     }
 
     .CARRT {
@@ -138,7 +143,7 @@ line-height:32px;
 
     .navbar-text {
         color: white;
-        font-weight: bold;
+       
     }
 
     .navbar-nav {
@@ -253,7 +258,48 @@ width: max-content;
     justify-content: center;
     background-color:#f8f9fa;
 }
+.button {
+  margin: 0;
+  height: auto;
+  background: transparent;
+  padding: 0;
+  border: none;
+  cursor: pointer;
+}
 
+/* button styling */
+.button {
+  --border-right: 6px;
+  --text-stroke-color: rgba(255,255,255,0.6);
+  --animation-color: #37FF8B;
+  --fs-size: 2em;
+  letter-spacing: 3px;
+  text-decoration: none;
+  font-size: var(--fs-size);
+  font-family: "Arial";
+  position: relative;
+  text-transform: uppercase;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--text-stroke-color);
+}
+/* this is the text, when you hover on button */
+.hover-text {
+  position: absolute;
+  box-sizing: border-box;
+  content: attr(data-text);
+  color: var(--animation-color);
+  width: 0%;
+  inset: 0;
+  border-right: var(--border-right) solid var(--animation-color);
+  overflow: hidden;
+  transition: 0.5s;
+  -webkit-text-stroke: 1px var(--animation-color);
+}
+/* hover */
+.button:hover .hover-text {
+  width: 100%;
+  filter: drop-shadow(0 0 23px var(--animation-color))
+}
 </style>
 </head>
 <body>
@@ -261,7 +307,10 @@ width: max-content;
     <nav class="navbar navbar-expand-sm bg-light navbar-light">
       <!-- Brand/logo -->
       <a class="navbar-brand" href="#">
-        <img class="bg-light rounded-circle" src="https://img.freepik.com/vector-gratis/logotipo-viaje-detallado_23-2148627268.jpg" alt="" style="width:100px;"/>
+        <button class="button" data-text="Awesome">
+          <span style="color:black;" class="actual-text">&nbsp;EXTREMETRAVEL&nbsp;</span>
+          <span aria-hidden="true" class="hover-text">&nbsp;EXTREMETRAVEL&nbsp;</span>
+      </button>
       </a>
 
       <!-- Navbar toggle button -->
@@ -292,11 +341,12 @@ width: max-content;
           </li>
           {% if user.is_authenticated %}
           <li class="nav-item">
-            <span class="navbar-text">Bienvenido {{ user.username }}</span>
+            <span class="navbar-text">DE
+               {{ user.username }}</span>
           </li>
           <li class="nav-item">
             <a href="{% url 'food:logout' %}" class="nav-link">
-              <img class="bg-light rounded-circle" srcset="https://img.icons8.com/external-bearicons-glyph-bearicons/344/external-log-in-call-to-action-bearicons-glyph-bearicons-1.png 2x" alt="icon" loading="lazy" style="width: 30px; height: 30px; filter: invert(0%) sepia(0%) saturate(0%) hue-rotate(102deg) brightness(99%) contrast(104%);"/>
+              <img class="bg-light rounded-circle" srcset="{{user.profile_image_url}}" alt="icon" loading="lazy" style="width: 40px; height: 40px; "/>
               LogOut
             </a>
           </li>
@@ -343,11 +393,16 @@ width: max-content;
       </table>
        <div class="ml-auto m-5 rounded" style="background-color:white;border: 2px solid black; width: fit-content; padding:5px;height: fit-content;">
       {% if user.is_authenticated %}
+      <table>
+        <tr>
+          <tbody>
+          
       <p><b>Total a Pagar sin puntos aplicados: ${{ subtotal }}</b></p>
       <p><b>Total a Pagar con puntos aplicados: ${{ total }}</b></p>
-      <p style="color:green;"><b>VAS  A ACUMULAR: ${{ puntos }} EN PUNTOS</b></p>
-      <h4>Realizar Pago con:</h4>
-      
+      <p style="color:green;"><b>VAS  A ACUMULAR: ${{ puntos }} EN PUNTOS</b>
+      <h4>Realizar Pago con:</h4><br>
+          </tbody> </tr>
+      </table>
 
       <form action="{% url 'food:paymen' %}" method="post">
         {% csrf_token %}

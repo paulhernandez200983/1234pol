@@ -6,7 +6,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}EXTREMETRAVEL {% endblock %}</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
+  <!-- Popper JS -->
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+
+  <!-- Latest compiled JavaScript -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
@@ -55,10 +62,19 @@
         .navbar-brand img {
           border: none; /* Elimina el borde del logo en dispositivos móviles */
         }
-      }
+      
     
       .navbar-light .navbar-nav .nav-link {
-        color: #0e8056;
+        color: black;
+        
+      }
+      .nav-link:hover{
+        color:transparent;
+      }
+      .navbar-nav .nav-link:hover {
+        color: #37FF8B; /* Color de resaltado al pasar el ratón */
+        text-decoration: underline;
+        font-weight:bold;
       }
       body {
         background-image: url('https://img.freepik.com/foto-gratis/concreto-texturado-blanco_125540-1826.jpg?w=996&t=st=1708584169~exp=1708584769~hmac=6802f37a96b71f7b953580787dab6c7cf1f21b681cf0d8a35082798e77006d33');
@@ -113,14 +129,9 @@ line-height:32px;
     
     /* Keep your existing styles below this line */
    
-      .navbar-nav .nav-link {
-          color:#0e8056;
-          font-weight: bold;
-      }
+    
   
-      .navbar-nav .nav-link:hover {
-          color: #0e8056; /* Color de resaltado al pasar el ratón */
-      }
+     
   
       .CARRT {
           padding: 15px;
@@ -254,9 +265,9 @@ line-height:32px;
       background-color: rgba(0, 0, 0, 0.57); /* Fondo semitransparente, puedes ajustar el color y la opacidad según sea necesario */
   }
   .text-overlay {
-    position: absolute;
-    top: 60%;
-    left: 30%;
+    position: fixed;
+    top: 30%;
+    left: 40%;
     transform: translate(-50%, -50%);
     color: #fff;
     text-align: LEFT;
@@ -264,14 +275,9 @@ line-height:32px;
     font-weight: bold;
 }
 
-.navbar-nav .nav-link {
-  color: #0e8056;
-  font-weight: bold;
-}
 
-.navbar-nav .nav-link:hover {
-  color: #0e8056; /* Color de resaltado al pasar el ratón */
-}
+
+
 
 .CARRT {
   padding: 15px;
@@ -399,11 +405,13 @@ h2 {
   font-weight:bold;
 }
 
-
+a:hover{
+  color:black;
+}
 
 .text-overlay {
   position: absolute;
-  top: 60%;
+  top: 40%;
   left: 30%;
   transform: translate(-50%, -50%);
   color: #fff;
@@ -416,7 +424,49 @@ h2 {
   justify-content: center;
   background-color:#f8f9fa;
 }
+/* === removing default button style ===*/
+.button {
+  margin: 0;
+  height: auto;
+  background: transparent;
+  padding: 0;
+  border: none;
+  cursor: pointer;
+}
 
+/* button styling */
+.button {
+  --border-right: 6px;
+  --text-stroke-color: rgba(255,255,255,0.6);
+  --animation-color: #37FF8B;
+  --fs-size: 2em;
+  letter-spacing: 3px;
+  text-decoration: none;
+  font-size: var(--fs-size);
+  font-family: "Arial";
+  position: relative;
+  text-transform: uppercase;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--text-stroke-color);
+}
+/* this is the text, when you hover on button */
+.hover-text {
+  position: absolute;
+  box-sizing: border-box;
+  content: attr(data-text);
+  color: var(--animation-color);
+  width: 0%;
+  inset: 0;
+  border-right: var(--border-right) solid var(--animation-color);
+  overflow: hidden;
+  transition: 0.5s;
+  -webkit-text-stroke: 1px var(--animation-color);
+}
+/* hover */
+.button:hover .hover-text {
+  width: 100%;
+  filter: drop-shadow(0 0 23px var(--animation-color))
+}
 
   </style>
 </head>
@@ -425,7 +475,10 @@ h2 {
     <nav class="navbar navbar-expand-sm bg-light navbar-light">
       <!-- Brand/logo -->
       <a class="navbar-brand" href="#">
-        <img class="bg-light rounded-circle" src="https://img.freepik.com/vector-gratis/logotipo-viaje-detallado_23-2148627268.jpg" alt="" style="width:100px;"/>
+        <button class="button" data-text="Awesome">
+          <span style="color:black;" class="actual-text">&nbsp;EXTREMETRAVEL&nbsp;</span>
+          <span aria-hidden="true" class="hover-text">&nbsp;EXTREMETRAVEL&nbsp;</span>
+      </button>
       </a>
 
       <!-- Navbar toggle button -->
@@ -467,7 +520,7 @@ h2 {
           </li>
            {% if user.is_authenticated %}
             <li class="nav-item">
-                <span class="navbar-text">Bienvenido {{ user.username }}</span>
+                <span class="navbar-text">DE {{ user.username }}</span>
             </li>
             {% endif %}
           <li class="nav-item">
@@ -479,7 +532,7 @@ h2 {
           {% if user.is_authenticated %}
           <li class="nav-item">
             <a href="{% url 'food:logout' %}" class="nav-link">
-                <img class="bg-light rounded-circle" srcset="https://img.icons8.com/external-bearicons-glyph-bearicons/344/external-log-in-call-to-action-bearicons-glyph-bearicons-1.png 2x" alt="icon" loading="lazy" style="width: 30px; height: 30px; filter: invert(0%) sepia(0%) saturate(0%) hue-rotate(102deg) brightness(99%) contrast(104%);"/>
+                <img class="bg-light rounded-circle" srcset="{{user.profile_image_url}}"  style="width: 40px; height: 40px;"/>
                 LogOut
             </a>
           </li>
@@ -567,7 +620,7 @@ h2 {
             
               <img class="d-block w-100 img-fluid rounded" src="{{ chicken.pImage }}" alt="{{ chicken.name }}" style="width:100%" height="300px">
               
-              <div class="carousel-caption d-none d-md-block" >;
+              <div class="carousel-caption d-none d-md-block" >
             
             
                <button style="background-color: #00000063;" class="btn-info mt-4" onclick="redirectToDetails('{{ chicken.id }}')">Ver Detalles</button>
