@@ -14,7 +14,7 @@
     <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-<link rel="icon" href="https://www.flaticon.es/svg/vstatic/svg/3916/3916657.svg?token=exp=1662854069~hmac=136bd71682904cb823525cd8938961b9">
+
 {% load static %}
 <style>
   .payment-buttons {
@@ -368,83 +368,42 @@ width: max-content;
         </ul>
       </div>
     </nav>
-  </div><center>
-    <div class="container-fluid m-4" style="display:flex;">
-      <table class="table table-bordered"> 
-          <thead>
-              <tr>
-                  <th>Producto</th>
-                  <th>Precio</th>
-                  <th>Cantidad</th>
-              </tr>
-          </thead>
-          <tbody>
-              {% for item in items_carrito %}
-              <tr>
-                  <td>- {{ item.pollo.name }}</td>
-                  <td>${{ item.pollo.priceM }}</td>
-                  <td>{{ item.cantidad }}</td>
-              </tr>
-              {% empty %}
-              <tr>
-                  <td colspan="3">No hay productos en el carrito</td>
-              </tr>
-              {% endfor %}
-          </tbody>
+  </div>
+ 
+  <div class="container">
+    <h3>ORDENES</h3>
+    <div class="table-responsive">
+      <table class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th>No. de Orden</th>
+            <th>Fecha de Creación</th>
+            <th>Total</th>
+            <th>Productos</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for orden in ordenes_usuario %}
+          <tr>
+            <td><center>{{ orden.id }}</center></td>
+            <td>{{ orden.created_at }}</td>
+            <td>${{ orden.total_amount }}</td>
+            <td>
+              <ul>
+                {% for item in orden.items.all %}
+                  <li>{{ item.product_name }} ({{ item.quantity }} x ${{ item.price }})</li>
+                {% endfor %}
+              </ul>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
       </table>
-       <div class="ml-auto m-5 rounded" style="background-color:white;border: 2px solid black; width: fit-content; padding:5px;height: fit-content;">
-      {% if user.is_authenticated %}
-      <table>
-        <tr>
-          <tbody>
-          
-      <p><b>Total a Pagar sin puntos aplicados: ${{ subtotal }}</b></p>
-      <p><b>Total a Pagar con puntos aplicados: ${{ total }}</b></p>
-      <p style="color:green;"><b>VAS  A ACUMULAR: ${{ puntos }} EN PUNTOS</b>
-      <h4>Realizar Pago con:</h4><br>
-          </tbody> </tr>
-      </table>
+    </div>
+  </div>
 
-      <form action="{% url 'food:paymen' %}" method="post">
-        {% csrf_token %}
-        <button type="submit" class="paypal-button">
-          <img src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/PP_logo_h_150x38.png" alt="Pagar con PayPal">
-        </button>
-      </form>
-      
+  
     
-     
-      <div class="container-fluid ">
-        <center>
-          <h4>o </h4>
-        <button type="submit" class="BET btn btn-info" onclick="redirectToDetails()" ><b>Pagar con tarjeta<b></button>
-  </div>
-  
-  <script>
-  function redirectToDetails(chickenId) {
-    // Cambia la URL según la estructura de tus URLs de detalles
-    window.location.href = "{% url 'food:tarjeta'  %}";
-}</script>
-
-
-{% else %}
-<li class="nav-item">
-<a href="{% url 'food:login' %}" class="nav-link {% if active_link == 'index' %}active {% endif %}">
-<img class="bg-light rounded-circle" srcset="https://img.icons8.com/external-bearicons-glyph-bearicons/344/external-log-in-call-to-action-bearicons-glyph-bearicons-1.png 2x" alt="icon" loading="lazy" style="width: 30px; height: 30px; filter: invert(0%) sepia(0%) saturate(0%) hue-rotate(102deg) brightness(99%) contrast(104%);"/>
-INICIA SESION
-</a>
-</li>
-<li class="nav-item">
-<a href="{% url 'food:signup' %}" class="nav-link {% if active_link == 'signup' %}active {% endif %}">
-<img class="bg-light rounded-circle" srcset="https://img.icons8.com/external-bearicons-glyph-bearicons/344/external-log-in-call-to-action-bearicons-glyph-bearicons-1.png 2x" alt="icon" loading="lazy" style="width: 30px; height: 30px; filter: invert(0%) sepia(0%) saturate(0%) hue-rotate(102deg) brightness(99%) contrast(104%);"/>
-CREA UNA CUENTA
-</a>
-</li>
-{% endif %}
-</div>
-     </div>
-  </div>
-  
   
     
     

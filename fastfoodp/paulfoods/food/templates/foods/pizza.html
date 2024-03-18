@@ -5,14 +5,20 @@
             <meta http-equiv="X-UA-Compatible" content="IE=edge">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>{% block title %}PERFIL {%endblock%}</title>
-        
+            <link rel="icon" class-"rounded-circle" href="https://cdn-icons-png.flaticon.com/512/5776/5776766.png" type="image/x-icon">
             <!-- Latest compiled and minified CSS -->
+            <script
+            src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+            crossorigin="anonymous"
+          ></script>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-        <link rel="icon" href="https://www.flaticon.es/svg/vstatic/svg/3916/3916657.svg?token=exp=1662854069~hmac=136bd71682904cb823525cd8938961b9">
+        
         {% load static %}
         <style>
+
           .profile-image {
             width: 300px; /* Ancho de la imagen de perfil */
             height: 300px; /* Altura de la imagen de perfil */
@@ -29,7 +35,7 @@
             color: BLACK;
           }
       body {
-        background-image: url('https://img.freepik.com/foto-gratis/concreto-texturado-blanco_125540-1826.jpg?w=996&t=st=1708584169~exp=1708584769~hmac=6802f37a96b71f7b953580787dab6c7cf1f21b681cf0d8a35082798e77006d33');
+       
         background-size: cover;
         background-position: center center;
         background-attachment: fixed;
@@ -128,6 +134,7 @@
           flex-flow: initial;
           -ms-flex-pack: start;
           justify-content: center;
+          padding: 20px;
       }
   
       .container {
@@ -219,6 +226,8 @@
   width: 100%;
   filter: drop-shadow(0 0 23px var(--animation-color))
 }
+p{
+}
     
         </style>
         </head>
@@ -298,9 +307,9 @@
             
           </nav><center>
           <div>
-            {% block content %}
+           
             <br><br><br>
-            <div class="col-md-6 p-4 card" style="color:black">
+            <div class="col-md-10 p-4 card" style="color:black">
   <h1 style="color:#0fd28a;"><B>PERFIL DEL USUARIO</b></h1><br>
   
 
@@ -309,7 +318,9 @@
       <!-- Imagen de usuario -->
       <div style="flex: 2;">
           <img class="profile-image" src="{{ user.profile_image_url }}" alt="SIN IMAGEN DE PERFIL"><br>
-          <p>{{puntos}}</p>
+          
+          <p STYLE="COLOR:GREEN; font-weight:bold;> ">PUNTOS ACUMULADOS<BR>{{puntos}}</p>
+            <button id="editProfileBtn" class="btn btn-info"><b>Editar Perfil</b></button><br><BUTTON class="btn-info "><a class="" STYLE="color:white;" href="{% url 'food:ordenes' %}" class="nav-link {% if active_link == 'index' %}active {% endif %}"><b>Ver ordenes</b></a></button><br>
       </div>
       <!-- Datos del usuario -->
       <div style="flex: 2; padding-left: 20px; text-align: center;">
@@ -326,7 +337,7 @@
         
   </div>
   <br><br>
-  <button id="editProfileBtn" class="btn btn-info"><b>Editar Perfil</b></button>
+ 
       <div id="editFormContainer"></div>
       <script>
         let editFormVisible = false;
@@ -392,41 +403,16 @@
       </a>
   </li>
   {% endif %}
-  <br><br><br><br>
-  <h2><b>User Orders</b></h2>
-  {% if user.is_authenticated %}
-  <table class="table table-bordered"> 
-    <thead>
-        <tr>
-            <th>Producto</th>
-            <th>Precio</th>
-            <th>Cantidad</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for item in items_carrito %}
-        <tr>
-            <td>- {{ item.pollo.name }}</td>
-            <td>${{ item.pollo.priceM }}</td>
-            <td>{{ item.cantidad }}</td>
-        </tr>
-        {% empty %}
-        <tr>
-            <td colspan="3">No hay productos en el carrito</td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>{%endif%}
-</div>
+  
+  
+ <br> </div>
 
-{% endblock %}
+
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     
 <!-- Latest compiled JavaScript -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
-<script src="{% static 'food/js/main.js' %}"></script>
-<script src="{% static 'food/js/order.js' %}"></script>
-<script src="{% static 'food/js/cart.js' %}"></script>
+
 
 
 

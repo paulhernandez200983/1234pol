@@ -57,9 +57,9 @@ def steak(request):
 def pizza(request):
     request.session.set_expiry(0)
     pizzas= Pizza1.objects.all()
-    ctx = {'pizzas':pizzas}
+   
     print(pizzas)
-    return render(request, 'foods/pizza.html',ctx)
+    return render(request, 'foods/pizza.html')
 
 def contact(request):
     return render(request, 'foods/contact.html')
@@ -312,7 +312,7 @@ def chicken(request):
     items_carrito = ItemCarrito.objects.filter(carrito=carrito)
     ctx = {'chickens':chickens, 'active_link':'actividad'}
     print(chickens)
-    cards_per_page = 8
+    cards_per_page = 9
 
     paginator = Paginator(chickens, cards_per_page)
     page = request.GET.get('page')
@@ -613,7 +613,8 @@ def profile(request):
 
         # Puedes asignar los datos para mostrarlos en la plantilla
         user_data = {'username': username, 'email': email}
-        carrito, _ = Carrito.objects.get_or_create(usuario=request.user)
+        
+    carrito, _ = Carrito.objects.get_or_create(usuario=request.user)
     
     # Obtener los elementos del carrito
     items_carrito = ItemCarrito.objects.filter(carrito=carrito)
@@ -633,7 +634,28 @@ def profile(request):
     # Restar los puntos deducidos del total del carrito
     total_carrito = total_carrit- puntos_deducidos
 
+    print("Total del carrito:", total_carrito)
+    print("Subtotal:", total_carrit)
+    print("Puntos deducidos:", puntos_deducidos)
 
     return render(request, 'foods/pizza.html', {'user_data': user_data, 'orders': user_orders, 'orders1': orders1 , 'items_carrito': items_carrito, 'subtotal': total_carrit, 'total':total_carrito, 'puntos':puntos_deducidos})
 
 
+
+
+
+
+from django.shortcuts import render
+from .models import Order1
+
+def ver_detalles_carrito(request):
+    # Verificar si el usuario está autenticado
+    if request.user.is_authenticated:
+        # Obtener las órdenes realizadas por el usuario actual
+        ordenes_usuario = Order1.objects.filter(user=request.user)
+        print(ordenes_usuario)
+        # Pasar las órdenes a la plantilla para ser mostradas
+        return render(request, 'foods/ordenes.html', {'ordenes_usuario': ordenes_usuario})
+    else:
+        # Si el usuario no está autenticado, redirigirlo a la página de inicio de sesión
+        return redirect('login_page')

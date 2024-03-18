@@ -78,8 +78,9 @@ class CustomUserAdmin(ImportExportModelAdmin):
 # Registra la clase CustomUserAdmin con el modelo CustomUser
 admin.site.register(CustomUser, CustomUserAdmin)
 from django.contrib import admin
-from .models import Carrito, ItemCarrito, ChickenReview
+from .models import Carrito, ItemCarrito, ChickenReview, OrderItem
 
 admin.site.register(Carrito)
 admin.site.register(ItemCarrito)
 admin.site.register(ChickenReview)
+admin.site.register(OrderItem)

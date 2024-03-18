@@ -46,8 +46,8 @@ path ('ver_carrito_y_pagarp/',views.ver_carrito_y_pagarp, name=('ver_carrito_y_p
      path('checkout/', views.payment_checkout, name='checkout_payment'),
 
     path('execute_payment', views.execute_payment, name='execute_payment'),
-    path('payment_failed', views.payment_failed, name='payment_failed')
- 
+    path('payment_failed', views.payment_failed, name='payment_failed'),
+ path ('ordenes/',views.ver_detalles_carrito, name=('ordenes')),
 
 
 

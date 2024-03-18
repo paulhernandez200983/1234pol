@@ -161,6 +161,7 @@ line-height:32px;
           flex-flow: initial;
           -ms-flex-pack: start;
           justify-content: center;
+          padding: 20px;
       }
   
       .container {
@@ -295,7 +296,7 @@ line-height:32px;
 
 * {
   margin: 0;
-  box-sizing: border-box;
+  
 }
 
 .navbar-text {
@@ -383,7 +384,7 @@ line-height:32px;
 }
 
 .locations-container {
-  display: flex;
+  display: -webkit-inline-box;
   justify-content: space-around;
   padding: 20px;
   box-sizing: border-box;
@@ -404,7 +405,14 @@ h2 {
   color:#0fd28a;
   font-weight:bold;
 }
-
+.pow {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin-right: -95px;
+  margin-left: -15px;
+}
 a:hover{
   color:black;
 }
@@ -563,9 +571,9 @@ a:hover{
     <div style="background-color: #e8e5e5f0; padding: 20px;">
       <center>
        
-        <section>
-        <img class="d-block w-100" src="https://cdn-3.expansion.mx/dims4/default/a47d385/2147483647/strip/true/crop/1365x768+0+0/resize/1200x675!/format/webp/quality/60/?url=https%3A%2F%2Fcdn-3.expansion.mx%2Fe6%2F1a%2Fc260f8f54ce390305d0ff3cad6f1%2Fdeportes-extremos.jpg" alt="" style="width:300px" height="800px">
-        <div class="text-overlay"><img class="bg-DARK rounded-circle" srcset="https://cdn-icons-png.flaticon.com/512/6734/6734956.png 2x" alt="icon" loading="lazy" style="width: 200px; height: 200px; filter: invert(0%) sepia(0%) saturate(0%) hue-rotate(102deg) brightness(99%) contrast(104%);"/> <ITALIC><H1>BIENVENIDO A EXTREMETRAVEL</H1></ITALIC></div>
+        <section style="display: flex;">
+        <img class="d-block w-100 rounded" src="https://cdn-3.expansion.mx/dims4/default/a47d385/2147483647/strip/true/crop/1365x768+0+0/resize/1200x675!/format/webp/quality/60/?url=https%3A%2F%2Fcdn-3.expansion.mx%2Fe6%2F1a%2Fc260f8f54ce390305d0ff3cad6f1%2Fdeportes-extremos.jpg" alt="">
+        
       </section>
         <h2>{{ msg }}</h2>
         
@@ -602,7 +610,7 @@ a:hover{
     {% block conten %}<h4 ><p class="pe"> <b>Explora las diferentes actividades disponibles!<b></p></h4>{% endblock %}
 
     <br> <br> 
-    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" width="400px" style="width:1500px; height:500px;">
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" width="400px" style="width:1500px; height:500px; display: table-cell;">
       <ol class="carousel-indicators">
         <center>
         {% for i in images %}
@@ -639,8 +647,8 @@ a:hover{
         {% endfor %}
       </div>
     
-      <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-        <span class="carousel-control-prev-icon" style="background-color: black;" aria-hidden="true"></span>
+      <a class="carousel-control-prev" style="border: 6px solid #fff0 !important;"href="#carouselExampleIndicators" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icn" style="background-color: black;" aria-hidden="true"></span>
         <span class="sr-only">Previous</span>
       </a>
       <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
@@ -678,9 +686,7 @@ a:hover{
     
     <!-- Latest compiled JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="{% static 'food/js/main.js' %}"></script>
-    <script src="{% static 'food/js/order.js' %}"></script>
-    <script src="{% static 'food/js/cart.js' %}"></script>
+   
     
   <footer class="bg-dark text-white p-4">
     <div class="container">

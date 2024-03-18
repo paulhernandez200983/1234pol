@@ -5,16 +5,18 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}UBICACIONES {%endblock%}</title>
+    <title>{% block title %}UBICACIONES {%endblock%}</title><link rel="icon" class-"rounded-circle" href="https://cdn-icons-png.flaticon.com/512/5776/5776766.png" type="image/x-icon">
+{% load static %}
     <script
     src="https://code.jquery.com/jquery-3.6.0.min.js"
     integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
     crossorigin="anonymous"
   ></script>
+  
     <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
-<link rel="icon" href="https://www.flaticon.es/svg/vstatic/svg/3916/3916657.svg?token=exp=1662854069~hmac=136bd71682904cb823525cd8938961b9">
-{% load static %}
+
+
 <style>
 
   body {
@@ -41,7 +43,7 @@
       background-color: #697276;
     }
   .navbar-light .navbar-nav .nav-link {
-    color: #0e8056;
+    color: black;
   }
     .form-inline .btn-success {
         background-color: #28a745;
@@ -73,7 +75,7 @@
 
     .navbar-nav .nav-link {
         color: white;
-        font-weight: bold;
+        
         
     }
 
@@ -109,6 +111,7 @@
         flex-flow: initial;
         -ms-flex-pack: start;
         justify-content: center;
+        padding: 20px;
     }
 
     .container {
@@ -222,16 +225,59 @@ cursor: pointer;
     text-decoration: underline; /* Subrayado al pasar el ratón */
 }
 
+.button {
+  margin: 0;
+  height: auto;
+  background: transparent;
+  padding: 0;
+  border: none;
+  cursor: pointer;
+}
 
+/* button styling */
+.button {
+  --border-right: 6px;
+  --text-stroke-color: rgba(255,255,255,0.6);
+  --animation-color: #37FF8B;
+  --fs-size: 2em;
+  letter-spacing: 3px;
+  text-decoration: none;
+  font-size: var(--fs-size);
+  font-family: "Arial";
+  position: relative;
+  text-transform: uppercase;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--text-stroke-color);
+}
+/* this is the text, when you hover on button */
+.hover-text {
+  position: absolute;
+  box-sizing: border-box;
+  content: attr(data-text);
+  color: var(--animation-color);
+  width: 0%;
+  inset: 0;
+  border-right: var(--border-right) solid var(--animation-color);
+  overflow: hidden;
+  transition: 0.5s;
+  -webkit-text-stroke: 1px var(--animation-color);
+}
+/* hover */
+.button:hover .hover-text {
+  width: 100%;
+  filter: drop-shadow(0 0 23px var(--animation-color))
+}
 </style>
 </head>
 <body>
   <nav class="navbar navbar-expand-sm bg-light navbar-light">
     <!-- Brand/logo -->
     <a class="navbar-brand" href="#">
-      <img class="bg-light rounded-circle" src="https://img.freepik.com/vector-gratis/logotipo-viaje-detallado_23-2148627268.jpg" alt="" style="width:100px;"/>
+      <button class="button" data-text="Awesome">
+        <span style="color:black;" class="actual-text">&nbsp;EXTREMETRAVEL&nbsp;</span>
+        <span aria-hidden="true" class="hover-text">&nbsp;EXTREMETRAVEL&nbsp;</span>
+    </button>
     </a>
-    
     <!-- Links -->
     <ul class="navbar-nav">
       <li class="nav-item">
@@ -255,7 +301,7 @@ cursor: pointer;
       </li>
        {% if user.is_authenticated %}
         <li class="nav-item">
-            <span class="navbar-text">Bienvenido {{ user.username }}</span>
+            <span class="navbar-text">DE {{ user.username }}</span>
         </li>
         {% endif %}
       <li class="nav-item">
@@ -267,7 +313,7 @@ cursor: pointer;
       {% if user.is_authenticated %}
       <li class="nav-item">
         <a href="{% url 'food:logout' %}" class="nav-link">
-            <img class="bg-light rounded-circle" srcset="https://img.icons8.com/external-bearicons-glyph-bearicons/344/external-log-in-call-to-action-bearicons-glyph-bearicons-1.png 2x" alt="icon" loading="lazy" style="width: 30px; height: 30px; filter: invert(0%) sepia(0%) saturate(0%) hue-rotate(102deg) brightness(99%) contrast(104%);"/>
+            <img class="bg-light rounded-circle" srcset="{{user.profile_image_url}}" alt="icon" loading="lazy" style="width: 40px; height: 40px; filter: invert(0%) sepia(0%) saturate(0%) hue-rotate(102deg) brightness(99%) contrast(104%);"/>
             LogOut
         </a>
       </li>
@@ -380,9 +426,6 @@ cursor: pointer;
 
 <!-- Latest compiled JavaScript -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
-<script src="{% static 'food/js/main.js' %}"></script>
-<script src="{% static 'food/js/order.js' %}"></script>
-<script src="{% static 'food/js/cart.js' %}"></script>
 
 
 

@@ -1,10 +1,3 @@
-
-
-
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}ACTIVIDADES {% endblock %}</title>
-
+    <link rel="icon" class-"rounded-circle" href="https://cdn-icons-png.flaticon.com/512/5776/5776766.png" type="image/x-icon">
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
@@ -64,9 +57,10 @@
     
     .col-md-6 {
         flex: 1; /* Distribute the available space equally between image and data */
+        text-align: initial;
     }
       body {
-        background-image: url('https://img.freepik.com/foto-gratis/concreto-texturado-blanco_125540-1826.jpg?w=996&t=st=1708584169~exp=1708584769~hmac=6802f37a96b71f7b953580787dab6c7cf1f21b681cf0d8a35082798e77006d33');
+       
         background-size: cover;
         background-position: center center;
         background-attachment: fixed;
@@ -80,7 +74,7 @@
         }
       
       .navbar-light .navbar-nav .nav-link {
-        color: balck;
+        color: black;
       }
         .form-inline .btn-success {
             background-color: #28a745;
@@ -89,6 +83,7 @@
         }
         .btn-info {
           color: #fff;
+          border: 2px solid #00aa6c;
            background-color: #0fd28a;
           border-color: #80ae90;
           margin: 5px;
@@ -98,8 +93,37 @@
   border-radius: 50px;
   font-size:18px;
   line-height:32px;
+  padding: 1.3em 2em;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-weight: 500;
+  color: #000;
+  background-color: #fff;
   
-  }
+  border-radius: 45px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+  
+  
+        }
+        .btn-info:hover {
+          background-color: #23c483;
+          box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+          color: #fff;
+          transform: translateY(-7px);
+        }
+
+        .btn-info:active {
+          transform: translateY(-1px);
+        }
+        .form-inline .btn-success:hover {
+            background-color: #218838; /* Color de resaltado al pasar el ratón */
+            border-color: #1e7e34;
+        }
+    
         .form-inline .btn-success:hover {
             background-color: #218838; /* Color de resaltado al pasar el ratón */
             border-color: #1e7e34;
@@ -120,7 +144,7 @@
     
         .navbar-nav .nav-link {
             color: white;
-            font-weight: bold;
+            
             
         }
     
@@ -157,6 +181,7 @@
             flex-flow: initial;
             -ms-flex-pack: start;
             justify-content: center;
+            padding: 20px;
         }
     
         .container {
@@ -196,7 +221,9 @@
           border: none;
           cursor: pointer;
         }
-        
+        .rounded {
+          border-radius: 1.25rem !important;
+        }
         /* button styling */
         .button {
           --border-right: 6px;
@@ -372,12 +399,13 @@
 
     <div class="col-md-8 p-4 card">
       <div class="row">
-          <div class="col-md-6" style="width:500px;">
+          <div class="col-md-6 " style="width:500px;text-align: initial;">
               <img style="background-image: url("{{chicken.pImage}}");" class="picture rounded" src="{{chicken.pImage}}" style="width: 400px; height: 300px;">
           </div>
           <div class="col-md-6">
+            <center>
               <h2 class="pt-4" id="chick{{chicken.id}}"><b>{{chicken.name}}</b></h2>
-
+            
               <br>
               
 
@@ -402,32 +430,32 @@
               
               <br>
               <img srcset="https://w7.pngwing.com/pngs/403/272/png-transparent-earth-globe-computer-icons-earth-globe-monochrome-world-thumbnail.png 2x" alt="icon" loading="lazy" style="width: 30px; height: 30px; "/> {{chicken.estd}}<br>
-              
-              <div>
-                  <b>
+              </center><br><br>
+            
+                  <b style="border-bottom: 2px solid #84828242;">
                       <br>
                       <p>Descripcion: {{chicken.desc}}</p>
                       <p>Direccion: {{chicken.address}}</p>
                     
-                      <p><img srcset="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7UilSX7KAnQYtqU2t2AAT6_v6S5kAuueQ7FY_103pYkSJ0hE0ACrvV9f3Oo69jJDPCA4&usqp=CAU 2x" alt="icon" loading="lazy" style="width: 30px; height: 30px; "/> Tel: {{chicken.tel}}</p>
-                  </b>
+                      <p style="border-bottom: 2px solid #84828242;"><img srcset="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7UilSX7KAnQYtqU2t2AAT6_v6S5kAuueQ7FY_103pYkSJ0hE0ACrvV9f3Oo69jJDPCA4&usqp=CAU 2x" alt="icon" loading="lazy" style="width: 30px; height: 30px; "/> Tel: {{chicken.tel}}<br></p>
+                  </b><br>
                   <p>Fecha de Viaje: {{chicken.datev}}</p>
-   
-                  <H3>Paquete:</H3>
-              <div class="form-check-inline">
+   <br><br>
+                  <H3><center>Paquete:<center></H3><br>
+              <div class="form-check-inline" style="border-bottom: 2px solid #84828242;">
                   <label class="form-check-label">
                       <input class="form-check-input" name="chicken{{chicken.id}}" value="{{chicken.priceM}}" type="radio">
                       Economico :${{chicken.priceM}} MXN
                   </label>
               </div>
-              <div class="form-check-inline">
+              <div class="form-check-inline" style="border-bottom: 2px solid #84828242;">
                   <label class="form-check-label">
                       <input class="form-check-input" name="chicken{{chicken.id}}" value="{{chicken.priceL}}" type="radio">
                       Premium :${{chicken.priceL}} MXN
                   </label>
               </div>
-              <br><br>
-              <div style='color:green;'><b>Puntos por esta compra: {{chicken.puntos}}</b></div>
+              <br><br><br>
+              <div style='color:green;'><b>Puntos por esta compra: {{chicken.puntos}}</b></div><br>
               <form action="{% url 'food:agregar_al_carrito' chicken.id %}" method="post">
                 {% csrf_token %}
                 <button class="btn-info mt-4"type="submit" onclick=showConfirmationModal();><img src="https://www.bogotraveltours.com/wp-content/uploads/2016/10/icono-encuentro.png" alt="heart" style="width: 20px; height: 20px;"><b> Agregar al carrito</b></button>
@@ -442,13 +470,18 @@
 
   </div>
 
-  <div class="col-md-6 p-4 card">
-    <h2><b>Reseñas</b></h2><br>
+  <div class="col-md-6 p-4 card"><center>
+    <p style="border-bottom: 2px solid #84828242;">
+    <b><h2>Reseñas</h2></b>
+    </p>
+    <br>
+    <center>
     {% if reviews %}
         <ul>
         {% for review in reviews %}
-            
-                <p>Autor: {{ review.user.username }}</p>
+        <div>
+            <img class="rounded-circle"src="{{user.profile_image_url}}" style="width:80px; border:2px solid black;"> 
+                <p>Autor: {{ review.user.username }}</p></div>
                 <p>Calificación: 
                     {% if review.rating == 1 %}
                         <i class="fas fa-star"></i>
@@ -463,13 +496,13 @@
                     {% endif %}
                 </p>
                 <p>Comentario: {{ review.comment }}</p>
-                <p>Fecha: {{ review.date_added }}</p>
+                <p style="border-bottom: 2px solid #84828242;">Fecha: {{ review.date_added }}<br></p>
             
-           <br><br>
+          <br>
         {% endfor %}
         </ul>
     {% else %}
-        <p>No hay reseñas disponibles para este pollo.</p>
+        <p>No hay reseñas disponibles para esta actividad.</p>
     {% endif %}
 </div>
 
@@ -600,7 +633,6 @@
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
   <!-- Latest compiled JavaScript -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="{% static 'food/js/main.js' %}"></script>
-  <script src="{% static 'food/js/order.js' %}"></script>
+
 </body>
 </html>
