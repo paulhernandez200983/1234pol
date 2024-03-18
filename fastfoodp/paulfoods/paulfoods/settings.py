@@ -125,9 +125,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = 'static/'
-STATIC_ROOT =PurePath.joinpath(BASE_DIR, 'staticfiles'  )
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
 
 PAYPAL_CLIENT_ID = 'AeetpAe5qdHU2LnDoKjcw-PWtDJGA2RCGAAQFupjPNuTAclwdayUODEkIf90apRdw9N1_FbrBTjE34U1'
 PAYPAL_CLIENT_SECRET = 'EAIKtUqz9aS2JEi1Tw0__C3pWrz1FYumbNI1vlL08qTQarmHjUbW2jB_Ppa_MS7tuNnkSHxlrkClNvQl'
