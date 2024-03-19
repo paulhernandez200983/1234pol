@@ -474,7 +474,32 @@
           <p><b>LAS MEJORES OFERTAS PARA VIAJES EN UN SOLO LUGAR</b></p>
       </div>
       
-  </div><br><br>
+  </div><br><br><banner ><p class="pe"><b> <h3 style="background-color: rgba(0, 0, 0, 0.57); color:white; font-weight:bold;"><img class="" srcset="https://cdn.icon-icons.com/icons2/1324/PNG/512/star_86960.png 2x" alt="icon" loading="lazy" style="width: 50px; height: 50px;"/> TOP DE ACTIVIDADES CON MEJOR RATING</h3></b></p></banner><br>{% for chicken in chickens %}{%if chicken.rating == 5 or chicken.rating == 4 %}
+  <div class="col-md-3 p-4 card">
+       <h4 class=" " style="font-size: 1rem;" id="chick{{chicken.id}}">  <b>{{chicken.name}}</b> <div class="rating">
+                
+                <!-- Utiliza íconos de estrellas vacías para representar las estrellas de calificación -->
+                {% if chicken.rating == 1 %}
+            <i class="fas fa-star"></i>
+        {% elif chicken.rating == 2 %}
+            <i class="fas fa-star"></i><i class="fas fa-star"></i>
+        {% elif chicken.rating == 3 %}
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+        {% elif chicken.rating == 4 %}
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+        {% elif chicken.rating == 5 %}
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+        {% endif %}
+            </div></h4>
+          
+         
+      <img class="picture  rounded" src="{{chicken.pImage}}" style="width:400px" height="400px">
+      <button class="BET btn-info mt-4" onclick="redirectToDetails('{{ chicken.id }}')"><B><img src="https://cdn.icon-icons.com/icons2/1206/PNG/512/1491254405-plusaddmoredetail_82972.png" alt="heart" style="width: 20px; height: 20px;"> Ver Detalles</B></button>
+
+  </div>
+  {%endif%}
+  {%endfor%}<br><br><br><br>
+  <h4><B>BUSCA, ENCUENTRA Y COMPRA LOS MEJORES VIAJES...</B></h4><BR>
     <div class="container">
       <form class="form-inline">
           <input class="form-control mr-sm-2" type="text" placeholder="Buscar por nombre" id="searchInput">
@@ -498,7 +523,7 @@
 <button type="button" class="btn btn-info my-2 my-sm-0" onclick="filterByCategory()"><b>Filtrar por Categoría</b></button>
         <!-- Botón de búsqueda -->
         
-      </form>
+      </form><BR>
       <div>
         <label for="priceRangeFilter">Select Price Range:</label>
         <select id="price-range-select">
@@ -507,8 +532,8 @@
           <option value="menor5000">Menor a 5000</option>
           <option value="mayor5000">Mayor a 5000</option>
         </select>
-       
-    </div>
+       <BR>
+    </div><BR>
     <button type="button" class="btn btn-info my-2 my-sm-0" onclick="filterbyprice('{{chicken.priceL}}')"><b>Filtrar por precio</b></button>
     <div class="container">
      
@@ -705,6 +730,8 @@
   </script>
   
     <div class="container-fluid perr" style="padding:80px">
+     
+      <br>
       <div class="row text-center background-color-dark">
         <div class="col-md-8">
           <div class="pow">
@@ -875,25 +902,25 @@
         </div>
       </div>
     </div>
-    
+  </div><div class="pagination col-md-4">
+    <span class="step-links"><b>
+        {% if chickens.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ chickens.previous_page_number }}">previous</a>
+        {% endif %}
+  
+        <span class="current">
+            Página {{ chickens.number }} de {{ chickens.paginator.num_pages }}.
+        </span>
+  
+        {% if chickens.has_next %}
+            <a href="?page={{ chickens.next_page_number }}">next</a>
+            <a href="?page={{ chickens.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+      </b></span>
+  </div>
 </div>
-</div><div class="pagination col-md-4">
-  <span class="step-links"><b>
-      {% if chickens.has_previous %}
-          <a href="?page=1">&laquo; first</a>
-          <a href="?page={{ chickens.previous_page_number }}">previous</a>
-      {% endif %}
-
-      <span class="current">
-          Página {{ chickens.number }} de {{ chickens.paginator.num_pages }}.
-      </span>
-
-      {% if chickens.has_next %}
-          <a href="?page={{ chickens.next_page_number }}">next</a>
-          <a href="?page={{ chickens.paginator.num_pages }}">last &raquo;</a>
-      {% endif %}
-    </b></span>
-</div><br><br><br><br><br><br>
+<br><br><br><br><br><br>
 <div class="errr" style="background-color: rgba(0, 0, 0, 0.57); padding: 20px; color:#0fd28a; font-weight:bold; "><h4 style="font-weight:bold;">ACTIVIDADES EN LAS MEJORES ZONAS EN MÉXICO<h4> </div><br><br>
 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" width="400px" style="width:1500px; height:500px;display: table-cell;">
   <ol class="carousel-indicators">
@@ -904,6 +931,7 @@
   </ol>
   <div class="carousel-inner">
     {% for chicken in chickens %}
+  
     {% if forloop.counter0|divisibleby:4 %} <!-- Comprueba si el índice es divisible por 4 -->
     <div class="carousel-item {% if forloop.first %}active{% endif %}">
       <div class="row">
@@ -925,7 +953,8 @@
           </script>
           
         </div>
-        {% if forloop.last or forloop.counter0|add:1|divisibleby:4 %} <!-- Comprueba si es la última iteración o si el siguiente índice sería divisible por 4 -->
+        {% if forloop.last or forloop.counter0|add:1|divisibleby:4 %}
+        <!-- Comprueba si es la última iteración o si el siguiente índice sería divisible por 4 -->
       </div>
     </div>
     {% endif %}

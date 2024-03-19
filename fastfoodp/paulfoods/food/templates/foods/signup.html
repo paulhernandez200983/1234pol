@@ -16,10 +16,7 @@
 
     <style>
       body {
-        background-image: url('https://img.freepik.com/foto-gratis/concreto-texturado-blanco_125540-1826.jpg?w=996&t=st=1708584169~exp=1708584769~hmac=6802f37a96b71f7b953580787dab6c7cf1f21b681cf0d8a35082798e77006d33');
-        background-size: cover;
-        background-position: center center;
-        background-attachment: fixed;
+        
     }
     .banner p {
       margin-top: 10px;
@@ -135,6 +132,7 @@
           padding: 20px;
           margin-bottom: 20px;
           border-radius: 10px; /* Optional: Add rounded corners */
+         
       }
     input{
       border: 3px solid #0fd28a;
@@ -257,6 +255,18 @@ line-height:32px;
         width: 100%;
         filter: drop-shadow(0 0 23px var(--animation-color))
       }
+      .form-group {
+        margin-bottom: 1rem;
+        display: -webkit-inline-box;
+        padding: 23px;
+      }
+      .rounded {
+        border-radius: .45rem !important;
+      }
+      input{
+        border-radius: 1.25rem !important;
+        text-align:center;
+      }
 </style>
 </head>
 <body>
@@ -278,7 +288,9 @@ line-height:32px;
       <li class="nav-item">
         <a class="nav-link {% if active_link == 'chicken' %} active{% endif %}" href="{% url 'food:actividad' %}">DEPORTES EXTREMOS</a>
       </li>
-      
+       <li class="nav-item">
+        <a class="nav-link" href="{% url 'food:steak' %}">TOURS</a>
+      </li>
       {%else%}
       <li class="nav-item">
         <a class="nav-link {% if active_link == 'chicken' %} active{% endif %}" href="{% url 'food:login' %}">LOGGEATE PARA VER LOS VIAJES</a>
@@ -287,9 +299,7 @@ line-height:32px;
       <li class="nav-item">
         <a class="nav-link" href="{% url 'food:burger' %}">MAPA</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'food:steak' %}">TOURS</a>
-      </li>
+     
       <li class="nav-item">
         <a class="nav-link" href="{% url 'food:drink' %}">RESEÑAS</a>
       </li>
@@ -334,13 +344,15 @@ line-height:32px;
     </ul> 
     
   </nav>
-  <br><br><br>
- 
-  <div class="container mt-5">
-    <div class="row justify-content-center">
-      <div class="col-md-5 rounded">
-        <div class="card bg-dark rounded text-light p-4 rounded" style="border: 3px solid #0fd28a;">
-          <h3 class="text-center mb-4 " style=" color:#0fd28a"><b>CREAR USUARIO<b></h3>
+  <br><br>
+ <center>
+  <div class="rounded" style="width:800px; background-image: url('https://pa1.aminoapps.com/6182/f4a75d22d9bbc04fcc81053ab6b265ab5e595f9c_hq.gif');background-size: cover; ">
+  <div class=" mt-5" style="width: auto; display:flex;">
+    <div class="row justify-content-center" style="">
+      
+      <div class="col rounded" style="width: auto;">
+        <div class="car  rounded text-light p-4 rounded" style="border: 3px solid #0fd28a; background-color: #101010a3;">
+          <h3 class="text-center mb-4 " style=" color:#0fd28a; width: auto; "><b>CREAR USUARIO<b></h3>
           <form method="POST" >
             <center>
             {% csrf_token %}
@@ -364,7 +376,7 @@ line-height:32px;
               </div>
             {% endfor %}
             <br><br>
-            <button type="submit" class="btn btn-info btn-block btn-sm"><b>Registrate</b></button>
+            <button type="submit" class="btn btn-info btn-block btn-sm" style="width: auto;"><b>Registrate</b></button>
           </form>
           {% for error in form.non_field_errors %}
             <small class="text-danger">{{ error }}</small>
@@ -373,7 +385,36 @@ line-height:32px;
       </div>
     </div>
   </div>
+</div>
   <h2 class="text-center mt-3">{{ msg }}</h2>
+  <footer class="bg-dark text-white p-4">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <h4>Contacto</h4>
+                <p><i class="fas fa-map-marker-alt"></i> Dirección: Ciudad, País</p>
+                <p><i class="fas fa-envelope"></i> Correo: info@extremetravel.com</p>
+                <p><i class="fas fa-phone"></i> Teléfono: +123 456 7890</p>
+            </div>
+            <div class="col-md-4">
+                <h4>Enlaces útiles</h4>
+                <ul class="list-unstyled">
+                    <li><a href="#">Inicio</a></li>
+                    <li><a href="#">Destinos</a></li>
+                    <li><a href="#">Tours</a></li>
+                    <li><a href="#">Reseñas</a></li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <h4>Síguenos</h4>
+                <p>Conéctate con nosotros en redes sociales:</p>
+                <a href="https://www.tripadvisor.com.mx/ShowUrl-a_partnerKey.1-a_url.http%3A__2F____2F__www__2E__facebook__2E__com__2F__TripAdvisor-a_urlKey.15090f72418302936.html" class="btn btn-outline-light"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="btn btn-outline-light"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="btn btn-outline-light"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </div>
+</footer>
   <!-- jQuery library -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <!-- Popper JS -->

@@ -312,7 +312,7 @@ def chicken(request):
     items_carrito = ItemCarrito.objects.filter(carrito=carrito)
     ctx = {'chickens':chickens, 'active_link':'actividad'}
     print(chickens)
-    cards_per_page = 9
+    cards_per_page = 21
 
     paginator = Paginator(chickens, cards_per_page)
     page = request.GET.get('page')
